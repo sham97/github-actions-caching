@@ -1,84 +1,41 @@
-# Parallelized Image Processing in Gatsby
+<p align="center">
+  <a href="https://www.learnwithjason.dev">
+    <img src="https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_240/v1579281727/lwj/learnwithjason.png" alt="Learn With Jason" width="120" />
+  </a>
+</p>
+<h1 align="center">
+  Caching Jamstack Sites With GitHub Actions (with Benjamin Lannon)
+</h1>
+<h3 align="center">
+  This app was built live on <em>Learn With Jason</em> and it was super fun and I’m sad you weren’t there.
+</h3>
+<p align="center">
+  But don’t worry! You can still: 
+  <a href="https://www.learnwithjason.dev/caching-jamstack-sites-with-github-actions"><strong>watch the video</strong></a> · 
+  <a href="https://github.com/learnwithjason/github-actions-caching/runs/855145984?check_suite_focus=true"><strong>see the demo</strong></a> · 
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/learnwithjason/github-actions-caching&utm_source=learnwithjason&utm_medium=github&utm_campaign=devex"><strong>deploy this project</strong></a> · 
+  <a href="https://jason.af/lwj/schedule"><strong>see upcoming episodes</strong></a>
+</p>
 
-- [Read the `gatsby-parallel-runner` announcement post from Matt Biilmann](https://dev.to/biilmann/open-source-parallel-processing-for-gatsby-270d)
-- [Read the tutorial for adding parallel image processing to your Netlify site](https://www.netlify.com/blog/2020/02/25/gatsby-build-speed-improvements-with-parallel-image-processing/?utm_source=github&utm_medium=gatsby-parallel-images-jl&utm_campaign=devex)
+&nbsp;
 
-This site is designed to make Gatsby work _really_ hard to process images. To do that, it:
+Did you know you can combine GitHub Actions with Netlify to build powerful integrations? Benjamin Lannon teaches us all about it in this episode!
 
-1. Has 200+ images ranging from 1–5MB committed to the repo to put additional memory strain on Sharp
-2. Loads all of the images in one page at a small, fixed size
-3. Loads each image on its own page at a different, fluid sizes
+&nbsp;
 
-This makes Gatsby earn it — on a 2017 MacBook Pro with 16GB of memory, it takes upwards of 5 minutes to process these images.
+## More Information
 
-The goal of this repo is to show the benefits of using the parallel processing enabled through `gatsby-plugin-sharp` and Gatsby’s support for running as a child process sending jobs out to the parent. This helps demonstrate how much faster our build times can be if we add a cloud-based Sharp processing pipeline.
+- [Watch this app get built live + see links and additional resources][episode]
+- [Follow _Learn With Jason_ on Twitch][twitch] to watch future episodes live
+- [Add the _Learn With Jason_ schedule to your Google Calendar][cal]
 
-## Setup and Installation
+&nbsp;
+<p align="center">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/learnwithjason/github-actions-caching&utm_source=learnwithjason&utm_medium=github&utm_campaign=devex">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy this project to Netlify" />
+  </a>
+</p>
 
-If you’d like to run this demo yourself, we _highly_ recommend using Netlify instead of running this locally.
-
-Why? A couple reasons:
-
-1. This is a _huge_ repo, and it'll burn a lot of bandwidth to download it
-2. The benefits are limited by the speed of your internet connection, so if you're not on a fiber connection, it may not seem like this is much faster — but data centers are on _very_ fast connections
-
-See [the tutorial](https://dev.to/biilmann/open-source-parallel-processing-for-gatsby-270d) to get a walkthrough of how to set this repo up on Netlify with parallel processing.
-
-That being said, you can definitely run this demo locally by following these steps.
-
-### 1. Fork this repo
-
-If you want to deploy this to Netlify, you’ll need your own copy of this repo to point to.
-
-However, if you just want to see the difference locally, you don’t need to fork.
-
-### 2. Clone and install dependencies
-
-```sh
-# clone your fork of the repo
-git clone git@github.com:<your_username>/image-processing.git
-
-# or you can clone this repo directly for local testing
-git clone git@github.com:jlengstorf/image-processing.git
-
-# move into the directory
-cd image-processing/
-
-# install dependencies
-npm install
-```
-
-### 3. Run a build _without_ the parallel runner
-
-```sh
-# use this repo’s copy of the `gatsby` command
-./node_modules/.bin/gatsby build
-```
-
-### 4. Set up Google Cloud and get credentials
-
-To use `gatsby-parallel-runner`, you’ll need a Google Cloud account with Cloud Pub/Sub, Cloud Functions, and the Cloud Storage JSON API enabled.
-
-Create a service account with the “Storage Admin” and “Pub/Sub Editor” roles, then generate a key as JSON.
-
-For a full walkthrough of this process, follow the tutorial on adding `gatsby-parallel-runner` to your projects.
-
-> TODO: link to this walkthrough once it’s published 😅
-
-### 5. Deploy the required Google Cloud services using `gatsby-parallel-runner`
-
-Make sure to replace `./path/to/creds.json` with the actual relative path to your Google Cloud credentials downloaded in the previous step.
-
-It is recommended to choose a unique `TOPIC` value for each site to avoid issues if two sites are building at the same time on your account.
-
-```sh
-GOOGLE_APPLICATION_CREDENTIALS=./path/to/creds.json TOPIC=unique-id-for-my-site WORKER_TOPIC=gatsby-parallel-runner ./node_modules/.bin/gatsby-parallel-runner deploy
-```
-
-### 5. Build the site using `gatsby-parallel-runner`
-
-The build will look just like a standard Gatsby build, except the image generation step will be _much_ faster! 🎉
-
-```sh
-GOOGLE_APPLICATION_CREDENTIALS=./path/to/creds.json TOPIC=unique-id-for-my-site WORKER_TOPIC=gatsby-parallel-runner ./node_modules/.bin/gatsby-parallel-runner
-```
+[episode]: https://www.learnwithjason.dev/caching-jamstack-sites-with-github-actions
+[twitch]: https://jason.af/twitch
+[cal]: https://jason.af/lwj/cal
